@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import { withState } from "react-searchkit";
 import { Search, Label, Button, Icon } from "semantic-ui-react";
 import { i18next } from "@translations/invenio_search_ui/i18next";

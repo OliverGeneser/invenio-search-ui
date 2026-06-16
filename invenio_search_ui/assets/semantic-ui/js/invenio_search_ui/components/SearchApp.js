@@ -4,7 +4,7 @@
  */
 
 import PropTypes from "prop-types";
-import React from "react";
+import { useState } from "react";
 import Overridable, {
   OverridableContext,
   overrideStore,
@@ -28,7 +28,7 @@ import { SearchAppResultsPane } from "./SearchAppResultsPane";
 const ResultOptionsWithState = withState(ResultOptions);
 
 export const SearchApp = ({ config, appName }) => {
-  const [sidebarVisible, setSidebarVisible] = React.useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const searchApi = new InvenioSearchApi(config.searchApi);
   const context = {
     appName,

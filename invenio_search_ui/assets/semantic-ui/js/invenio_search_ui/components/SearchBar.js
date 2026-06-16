@@ -3,12 +3,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-import React from "react";
-import {
-  SearchBar as ReactSearchKitSearchBar,
-  buildUID,
-} from "react-searchkit";
-import ReactDOM from "react-dom";
+import { SearchBar as ReactSearchKitSearchBar, buildUID } from "react-searchkit";
+import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import Overridable from "react-overridable";
 
@@ -16,7 +12,7 @@ export const SearchBar = ({ elementId, buildUID, appName }) => {
   const domElement = document.getElementById(elementId);
   if (domElement) {
     domElement.innerHTML = "";
-    return ReactDOM.createPortal(<ReactSearchKitSearchBar />, domElement);
+    return createPortal(<ReactSearchKitSearchBar />, domElement);
   }
   return (
     <Overridable id={buildUID("SearchApp.searchbar", "", appName)}>

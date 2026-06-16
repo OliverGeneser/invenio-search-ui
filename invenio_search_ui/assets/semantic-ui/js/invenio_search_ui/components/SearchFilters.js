@@ -5,7 +5,7 @@
 
 import { DropdownFilter } from "@js/invenio_search_ui/components";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import { Component } from "react";
 import { withState } from "react-searchkit";
 
 export class SearchFiltersComponent extends Component {

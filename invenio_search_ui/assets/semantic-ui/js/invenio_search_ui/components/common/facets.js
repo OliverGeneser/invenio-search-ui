@@ -4,7 +4,7 @@
  */
 
 import { i18next } from "@translations/invenio_search_ui/i18next";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Accordion,
   Button,

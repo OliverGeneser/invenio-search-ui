@@ -1,3 +1,4 @@
+import { createRoot } from "react-dom/client";
 /*
  * SPDX-FileCopyrightText: 2020 CERN.
  * SPDX-License-Identifier: MIT
@@ -5,8 +6,7 @@
 
 import { loadComponents } from "@js/invenio_theme/templates";
 import _camelCase from "lodash/camelCase";
-import React from "react";
-import ReactDOM from "react-dom";
+import { Fragment } from "react";
 import { SearchApp } from "./components";
 
 /**
@@ -25,7 +25,7 @@ export function createSearchAppInit(
   autoInit = true,
   autoInitDataAttr = "invenio-search-config",
   multi = false,
-  ContainerComponent = React.Fragment,
+  ContainerComponent = Fragment,
 ) {
 
   const initSearchApp = (rootElement) => {
@@ -33,16 +33,15 @@ export function createSearchAppInit(
       rootElement.dataset[_camelCase(autoInitDataAttr)]
     );
     loadComponents(appId, defaultComponents).then((res) => {
-      ReactDOM.render(
-        <ContainerComponent>
-          <SearchApp
-            config={config}
-            // Use appName to namespace application components when overriding
-            {...(multi && { appName: appId })}
-          />
-        </ContainerComponent>,
-        rootElement
-      );
+      const root = createRoot(rootElement);
+
+      root.render(<ContainerComponent>
+        <SearchApp
+          config={config}
+          // Use appName to namespace application components when overriding
+          {...(multi && { appName: appId })}
+        />
+      </ContainerComponent>);
     });
   };
 

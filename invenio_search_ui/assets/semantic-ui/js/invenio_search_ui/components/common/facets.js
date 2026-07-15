@@ -22,7 +22,7 @@ import {
   RangeFacet,
 } from "react-searchkit";
 
-export const ContribSearchAppFacets = ({ aggs, toggle, help, appName }) => {
+export const ContribSearchAppFacets = ({ aggs, toggle = false, help = true, appName = "" }) => {
   return (
     <>
       {toggle && (
@@ -76,13 +76,12 @@ ContribSearchAppFacets.propTypes = {
   appName: PropTypes.string,
 };
 
-ContribSearchAppFacets.defaultProps = {
-  toggle: false,
-  help: true,
-  appName: "",
-};
-
 export const ContribSearchHelpLinks = (props) => {
+  props = {
+    ...props,
+    appName: typeof props.appName === "undefined" ? "" : props.appName
+  };
+
   const { appName } = props;
   return (
     <Overridable id={buildUID("SearchHelpLinks", "", appName)}>
@@ -97,10 +96,6 @@ export const ContribSearchHelpLinks = (props) => {
 
 ContribSearchHelpLinks.propTypes = {
   appName: PropTypes.string,
-};
-
-ContribSearchHelpLinks.defaultProps = {
-  appName: "",
 };
 
 export const ContribParentFacetValue = ({
@@ -202,7 +197,7 @@ export const ContribBucketAggregationValuesElement = ({
   bucket,
   isSelected,
   onFilterClicked,
-  childAggCmps,
+  childAggCmps = null,
 }) => {
   const hasChildren = childAggCmps && childAggCmps.props.buckets.length > 0;
   const keyField = bucket.key_as_string ? bucket.key_as_string : bucket.key;
@@ -235,14 +230,10 @@ ContribBucketAggregationValuesElement.propTypes = {
   onFilterClicked: PropTypes.func.isRequired,
 };
 
-ContribBucketAggregationValuesElement.defaultProps = {
-  childAggCmps: null,
-};
-
 export const ContribBucketAggregationElement = ({
   agg,
   title,
-  containerCmp,
+  containerCmp = null,
   updateQueryFilters,
 }) => {
   const clearFacets = () => {
@@ -288,13 +279,9 @@ ContribBucketAggregationElement.propTypes = {
   updateQueryFilters: PropTypes.func.isRequired,
 };
 
-ContribBucketAggregationElement.defaultProps = {
-  containerCmp: null,
-};
-
 export const ContribRangeFacetElement = ({
   title,
-  containerCmp,
+  containerCmp = null,
   hasActiveFilter,
   onClear,
 }) => {
@@ -332,6 +319,3 @@ ContribRangeFacetElement.propTypes = {
   onClear: PropTypes.func.isRequired,
 };
 
-ContribRangeFacetElement.defaultProps = {
-  containerCmp: null,
-};

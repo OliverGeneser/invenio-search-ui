@@ -27,7 +27,23 @@ import { SearchAppResultsPane } from "./SearchAppResultsPane";
 
 const ResultOptionsWithState = withState(ResultOptions);
 
-export const SearchApp = ({ config, appName }) => {
+const searchAppDefaultPropConfig = {
+    searchApi: {
+      url: "",
+      withCredentials: false,
+      headers: {},
+    },
+    initialQueryState: {},
+    aggs: [],
+    sortOptions: [],
+    paginationOptions: {},
+    layoutOptions: {
+      listView: true,
+      gridView: false,
+    },
+    defaultSortingOnEmptyQueryString: {},
+  };
+export const SearchApp = ({ config = searchAppDefaultPropConfig, appName = null }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const searchApi = new InvenioSearchApi(config.searchApi);
   const context = {
@@ -210,22 +226,3 @@ SearchApp.propTypes = {
   appName: PropTypes.string,
 };
 
-SearchApp.defaultProps = {
-  config: {
-    searchApi: {
-      url: "",
-      withCredentials: false,
-      headers: {},
-    },
-    initialQueryState: {},
-    aggs: [],
-    sortOptions: [],
-    paginationOptions: {},
-    layoutOptions: {
-      listView: true,
-      gridView: false,
-    },
-    defaultSortingOnEmptyQueryString: {},
-  },
-  appName: null,
-};

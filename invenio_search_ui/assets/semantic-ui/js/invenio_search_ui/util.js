@@ -29,6 +29,8 @@ export function createSearchAppInit(
 ) {
 
   const initSearchApp = (rootElement) => {
+    if (rootElement.dataset.reactRootMounted) return;
+    rootElement.dataset.reactRootMounted = "true";
     const { appId, ...config } = JSON.parse(
       rootElement.dataset[_camelCase(autoInitDataAttr)]
     );

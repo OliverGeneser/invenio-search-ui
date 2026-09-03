@@ -10,6 +10,9 @@ import { i18next } from "@translations/invenio_search_ui/i18next";
 import _isEmpty from "lodash/isEmpty";
 import PropTypes from "prop-types";
 
+const optionsAsResults = (options) =>
+  (options || []).map((option) => ({ title: option.text, ...option }));
+
 const resultRenderer = ({ text }, queryString) => {
   let searchOption = "...";
 
@@ -73,7 +76,7 @@ export class MultipleOptionsSearchBar extends Component {
         onResultSelect={this.handleOnResultSelect}
         onSearchChange={this.handleOnSearchChange}
         resultRenderer={(props) => resultRenderer(props, queryString)}
-        results={options}
+        results={optionsAsResults(options)}
         value={queryString}
         placeholder={placeholder}
         minCharacters={0}
@@ -146,7 +149,7 @@ export class MultipleOptionsSearchBarCmp extends Component {
         onResultSelect={this.onBtnSearchClick}
         onSearchChange={this.handleOnSearchChange}
         resultRenderer={(props) => resultRenderer(props, queryString)}
-        results={options}
+        results={optionsAsResults(options)}
         value={queryString}
         placeholder={placeholder}
         className="right-angle-search-content"
